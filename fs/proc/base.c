@@ -87,7 +87,7 @@
 #include <linux/slab.h>
 #include <linux/flex_array.h>
 #include <linux/posix-timers.h>
-#include <linux/cpufreq_times.h>
+#include <linux/cpufreq.h>
 #ifdef CONFIG_HARDWALL
 #include <asm/hardwall.h>
 #endif
@@ -3000,8 +3000,10 @@ static const struct pid_entry tgid_base_stuff[] = {
 	REG("timers",	  S_IRUGO, proc_timers_operations),
 #endif
 	REG("timerslack_ns", S_IRUGO|S_IWUGO, proc_pid_set_timerslack_ns_operations),
-#ifdef CONFIG_CPU_FREQ_TIMES
+#ifdef CONFIG_CPU_FREQ_STAT
 	ONE("time_in_state", 0444, proc_time_in_state_show),
+	ONE("concurrent_active_time", 0444, proc_concurrent_active_time_show),
+	ONE("concurrent_policy_time", 0444, proc_concurrent_policy_time_show),
 #endif
 };
 
@@ -3387,8 +3389,10 @@ static const struct pid_entry tid_base_stuff[] = {
 	REG("projid_map", S_IRUGO|S_IWUSR, proc_projid_map_operations),
 	REG("setgroups",  S_IRUGO|S_IWUSR, proc_setgroups_operations),
 #endif
-#ifdef CONFIG_CPU_FREQ_TIMES
+#ifdef CONFIG_CPU_FREQ_STAT
 	ONE("time_in_state", 0444, proc_time_in_state_show),
+	ONE("concurrent_active_time", 0444, proc_concurrent_active_time_show),
+	ONE("concurrent_policy_time", 0444, proc_concurrent_policy_time_show),
 #endif
 };
 
